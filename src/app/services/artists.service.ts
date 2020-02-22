@@ -18,8 +18,19 @@ export class ArtistsService {
   getArtists(): Observable<Artist[]> {
     return this.http.get<Artist[]>(`${this.BASE_URL}/artists`);  // Ruta GET para listar artistas
    }
-  retrieveArtists(id) { }
-  createArtists(artist) { }
-  deleteArtists(id) { }
-  UdpateArtists(id, artist) { }
+  retrieveArtists(id): Observable<Artist> {
+    return this.http.get<Artist>(`${this.BASE_URL}/artists/${id}`); // Recuperar un artista.
+  }
+  createArtists(artist): Observable<Artist> {
+    return this.http.post<Artist>(`${this.BASE_URL}/artists`, artist);
+  }
+  UdpateArtists(id, artist): Observable<Artist> {
+    return this.http.put<Artist>(`${this.BASE_URL}/artists/${id}`, artist);
+  }
+  PartialUpdateArtists(id, artist): Observable<Artist> {
+    return this.http.patch<Artist>(`${this.BASE_URL}/artists/${id}`, artist);
+  }
+  deleteArtists(id) {
+    this.http.delete(`${this.BASE_URL}/artists/${id}`);
+  }
 }
