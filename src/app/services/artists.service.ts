@@ -12,11 +12,11 @@ import {Observable} from 'rxjs';
 })
 export class ArtistsService {
 
-  BASE_URL = 'localhost:8000';
+  BASE_URL = 'http://localhost:8000';
   constructor(private http: HttpClient) { }
 
   getArtists(): Observable<Artist[]> {
-    return this.http.get<Artist[]>(`${this.BASE_URL}/artists`);  // Ruta GET para listar artistas
+    return this.http.get<Artist[]>(`${this.BASE_URL}/artists/`);  // Ruta GET para listar artistas
    }
   retrieveArtists(id: string): Observable<Artist> {
     return this.http.get<Artist>(`${this.BASE_URL}/artists/${id}`); // Recuperar un artista.
