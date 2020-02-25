@@ -1,1 +1,20 @@
-<p>artists-list works!</p>
+<div *ngFor="let artist of artists" class="card card-body mb-2">
+    <div class="row">
+        <div class="col-md-8">
+            <ul>
+                <li>
+                    id: {{artist.id}}
+                </li>
+                <li>
+                    nombre: {{artist.name}}
+                </li>
+                <li>
+                    descripcion: {{artist.description}}
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <img [src]="artist.image" class="card-img">
+        </div>
+    </div>
+</div>

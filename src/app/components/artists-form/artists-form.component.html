@@ -1,5 +1,19 @@
 <div class="row">
     <div class="col-sm-4 offset-md-4">
-        
+        <div class="card card-body">
+            <form (submit)="submitproduct()">
+                <div class="from-group">
+                    <input type="text" name="name" placeholder="Nombre Artista" [(ngModel)]="artist.name" class="form-control" autofocus>
+                </div>
+                <div class="from-group">
+                    <input type="text" name="description" placeholder="Descripcion del Artista" [(ngModel)]="artist.description" class="form-control">
+                </div>
+                <!-- TODO Crear subir imagen -->
+                <div class="form-group">
+                    <input type="file" accept=".png, .jpg" (change)="onUpload($event)">
+                  </div>
+                <button class="btn btn-primary btn-bloque">Save</button>
+            </form>
+        </div>
     </div>
 </div>
