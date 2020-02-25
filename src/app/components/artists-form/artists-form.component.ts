@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{ Artist } from '../../interfaces/artists'
+import { FormBuilder, FormGroup,FormControl } from '@angular/forms';
+import { ArtistsService } from '../../services/artists.service'
 @Component({
   selector: 'app-artists-form',
   templateUrl: './artists-form.component.html',
@@ -11,14 +13,36 @@ export class ArtistsFormComponent implements OnInit {
     description:'',
     image:null,
   }
-  constructor() { }
+  uploadForm: FormGroup;
+  constructor(private formBuilder: FormBuilder, private artistService: ArtistsService) { }
 
   ngOnInit(): void {
+    this.uploadForm = this.formBuilder.group({
+      name:'',
+      description:'',
+      image: ['']
+    });
   }
-  submitproduct(){
-    console.log(this.artist);
+  submitartist(){
+    const formData = new FormData();
+    formData.append('image', this.uploadForm.get('image').value);
+    formData.append('name', this.uploadForm.get('name').value);
+    formData.append('description', this.uploadForm.get('description').value);
+    console.log(formData);
+    this.artistService.createArtists(formData).subscribe(
+      res => {
+        console.log(res);
+        console.log("Esto es de artist");
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
   onUpload(e){
-    console.log('File Archivo',e.target.files[0]);
+    if (e.target.files.length > 0) {
+      const file = e.target.files[0];
+      this.uploadForm.get('image').setValue(file);
+    }
   }
 }

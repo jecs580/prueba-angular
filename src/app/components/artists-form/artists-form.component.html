@@ -1,12 +1,12 @@
 <div class="row">
     <div class="col-sm-4 offset-md-4">
         <div class="card card-body">
-            <form (submit)="submitproduct()">
+            <form [formGroup] = "uploadForm" (submit)="submitartist()">
                 <div class="from-group">
-                    <input type="text" name="name" placeholder="Nombre Artista" [(ngModel)]="artist.name" class="form-control" autofocus>
+                    <input type="text" name="name" placeholder="Nombre Artista" formControlName="name" class="form-control" autofocus>
                 </div>
                 <div class="from-group">
-                    <input type="text" name="description" placeholder="Descripcion del Artista" [(ngModel)]="artist.description" class="form-control">
+                    <input type="text" name="description" placeholder="Descripcion del Artista" formControlName="description" class="form-control">
                 </div>
                 <!-- TODO Crear subir imagen -->
                 <div class="form-group">

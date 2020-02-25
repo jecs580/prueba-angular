@@ -23,8 +23,11 @@ export class ArtistsService {
   retrieveArtists(id: string): Observable<Artist> {
     return this.http.get<Artist>(`${this.BASE_URL}/artists/${id}`); // Recuperar un artista.
   }
-  createArtists(artist: Artist): Observable<Artist> {
-    return this.http.post<Artist>(`${this.BASE_URL}/artists`, artist);
+  createArtists(formdata:FormData): Observable<Artist> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Token 8bbeb3313d0badedf7e98d84f9642d9caf2a9f0c'
+    });
+    return this.http.post<Artist>(`${this.BASE_URL}/artists/`, formdata, {headers: headers});
   }
   UdpateArtists(id: string, artist: Artist): Observable<Artist> {
     return this.http.put<Artist>(`${this.BASE_URL}/artists/${id}`, artist);
