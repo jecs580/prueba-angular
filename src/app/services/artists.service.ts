@@ -33,12 +33,12 @@ export class ArtistsService {
     return this.http.post<Artist>(`${this.BASE_URL}/artists/`, formdata, {headers});
   }
   UdpateArtists(id: string, artist: Artist): Observable<Artist> {
-    return this.http.put<Artist>(`${this.BASE_URL}/artists/${id}`, artist);
+    return this.http.put<Artist>(`${this.BASE_URL}/artists/${id}/`, artist);
   }
   PartialUpdateArtists(id: string, artist: Artist): Observable<Artist> {
     return this.http.patch<Artist>(`${this.BASE_URL}/artists/${id}`, artist);
   }
   deleteArtists(id: string) {
-    this.http.delete(`${this.BASE_URL}/artists/${id}`);
+    return this.http.delete(`${this.BASE_URL}/artists/${id}/`);
   }
 }

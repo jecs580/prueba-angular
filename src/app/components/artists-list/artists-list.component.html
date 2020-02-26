@@ -12,6 +12,8 @@
                     descripcion: {{artist.description}}
                 </li>
             </ul>
+            <button class="btn btn-danger" (click)="deleteArtist(artist.id)">Eliminar</button>
+            <button class="btn btn-secondary" [routerLink]="['/artist/edit/',artist.id]">Editar</button>
         </div>
         <div class="col-md-4">
             <img [src]="artist.image" class="card-img">

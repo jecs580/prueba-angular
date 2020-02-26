@@ -7,7 +7,7 @@ import { Artist } from '../../interfaces/artists';
   styleUrls: ['./artists-list.component.css']
 })
 export class ArtistsListComponent implements OnInit {
-  artists: Artist[]=[];
+  artists: Artist[] = [];
   constructor(private artistsService: ArtistsService) { }
 
   ngOnInit(): void {
@@ -17,15 +17,27 @@ export class ArtistsListComponent implements OnInit {
   getArtists() {
     this.artistsService.getArtists()
       .subscribe(
-        res =>{
+        res => {
           console.log(res);
-          this.artists=res;
-          console.log("Esto es de artist",this.artists);
+          this.artists = res;
+          console.log('Esto es de artist', this.artists);
       },
         error => {
           console.log(error);
-        } 
+        }
+      );
+  }
 
-      )
+  deleteArtist(id:string) {
+    this.artistsService.deleteArtists(id)
+      .subscribe(
+      res => {
+        console.log(res);
+        this.getArtists();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

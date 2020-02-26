@@ -1,7 +1,7 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router'; // El ActivatedRoute proporciona informacion de la ruta.
 // Interfaces
 import { Artist } from '../../interfaces/artists';
 
@@ -21,10 +21,20 @@ export class ArtistsFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private artistService: ArtistsService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
+    const params = this.activatedRoute.snapshot.params;
+    if (params) {
+      this.artistService.retrieveArtists(params.id)
+        .subscribe(
+          res => {
+            console.log(res);
+          }
+        );
+    }
     this.uploadForm = this.formBuilder.group({
       name: '',
       description: '',
