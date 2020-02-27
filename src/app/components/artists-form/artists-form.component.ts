@@ -16,22 +16,27 @@ export class ArtistsFormComponent implements OnInit {
   artist: Artist = {
     name: '',
     description: '',
-    image: null };
+    image: null
+  };
   uploadForm: FormGroup;
+  edit: Boolean = false;
+  params1: any;
   constructor(
     private formBuilder: FormBuilder,
     private artistService: ArtistsService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-    ) { }
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     const params = this.activatedRoute.snapshot.params;
-    if (params) {
+    if (Object.keys(params).length !== 0) {
       this.artistService.retrieveArtists(params.id)
         .subscribe(
           res => {
-            console.log(res);
+            this.params1 = params;
+            this.edit = true;
+            this.artist = res;
           }
         );
     }
@@ -41,15 +46,28 @@ export class ArtistsFormComponent implements OnInit {
       image: ['']
     });
   }
-  submitartist() {
+  updateArtist() {
     const formData = new FormData();
     formData.append('image', this.uploadForm.get('image').value);
     formData.append('name', this.uploadForm.get('name').value);
     formData.append('description', this.uploadForm.get('description').value);
     console.log(formData);
+    this.artistService.UdpateArtists(this.params1.id, formData).subscribe(
+      res => {
+        this.router.navigate(['/']);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  submitartist() {
+    const formData = new FormData();
+    formData.append('image', this.uploadForm.get('image').value);
+    formData.append('name', this.uploadForm.get('name').value);
+    formData.append('description', this.uploadForm.get('description').value);
     this.artistService.createArtists(formData).subscribe(
       res => {
-        console.log(res);
         this.router.navigate(['/']);
       },
       error => {

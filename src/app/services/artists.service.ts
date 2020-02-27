@@ -24,7 +24,10 @@ export class ArtistsService {
     return this.http.get<Artist[]>(`${this.BASE_URL}/artists/`, {headers});  // Ruta GET para listar artistas
    }
   retrieveArtists(id: string): Observable<Artist> {
-    return this.http.get<Artist>(`${this.BASE_URL}/artists/${id}`); // Recuperar un artista.
+    const headers = new HttpHeaders({
+      Authorization: environment.token
+    });
+    return this.http.get<Artist>(`${this.BASE_URL}/artists/${id}/`, {headers}); // Recuperar un artista.
   }
   createArtists(formdata: FormData): Observable<Artist> {
     const headers = new HttpHeaders({
@@ -32,13 +35,19 @@ export class ArtistsService {
     });
     return this.http.post<Artist>(`${this.BASE_URL}/artists/`, formdata, {headers});
   }
-  UdpateArtists(id: string, artist: Artist): Observable<Artist> {
-    return this.http.put<Artist>(`${this.BASE_URL}/artists/${id}/`, artist);
+  UdpateArtists(id: string, formdata: FormData): Observable<Artist> {
+    const headers = new HttpHeaders({
+      Authorization: environment.token
+    });
+    return this.http.put<Artist>(`${this.BASE_URL}/artists/${id}/`, formdata, {headers});
   }
   PartialUpdateArtists(id: string, artist: Artist): Observable<Artist> {
-    return this.http.patch<Artist>(`${this.BASE_URL}/artists/${id}`, artist);
+    return this.http.patch<Artist>(`${this.BASE_URL}/artists/${id}/`, artist);
   }
   deleteArtists(id: string) {
-    return this.http.delete(`${this.BASE_URL}/artists/${id}/`);
+    const headers = new HttpHeaders({
+      Authorization: environment.token
+    });
+    return this.http.delete(`${this.BASE_URL}/artists/${id}/`, {headers});
   }
 }
