@@ -28,7 +28,7 @@ export class ArtistsListComponent implements OnInit {
       );
   }
 
-  deleteArtist(id:string) {
+  deleteArtist(id: string) {
     this.artistsService.deleteArtists(id)
       .subscribe(
       res => {
