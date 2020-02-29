@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+//Services
 import { ArtistsService } from '../../services/artists.service';
+import { TracksService } from '../../services/tracks.service';
+// Interfaces
 import { Artist } from '../../interfaces/artists';
+import { Track } from '../../interfaces/tracks';
 @Component({
   selector: 'app-artists-list',
   templateUrl: './artists-list.component.html',
@@ -8,10 +12,15 @@ import { Artist } from '../../interfaces/artists';
 })
 export class ArtistsListComponent implements OnInit {
   artists: Artist[] = [];
-  constructor(private artistsService: ArtistsService) { }
+  tracks: Track[]=[];
+  constructor(
+    private artistsService: ArtistsService,
+    private tracksService: TracksService
+    ) { }
 
   ngOnInit(): void {
     this.getArtists();
+    this.getTracks();
   }
 
   getArtists() {
@@ -21,6 +30,20 @@ export class ArtistsListComponent implements OnInit {
           console.log(res);
           this.artists = res;
           console.log('Esto es de artist', this.artists);
+      },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
+  getTracks() {
+    this.tracksService.getTracks()
+      .subscribe(
+        res => {
+          console.log(res);
+          this.tracks = res;
+          console.log('Esto es de tracks', this.tracks[0].file);
       },
         error => {
           console.log(error);
