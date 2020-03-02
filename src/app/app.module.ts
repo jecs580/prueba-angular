@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ArtistsListComponent } from './components/artists-list/artists-list.component';
 import { ArtistsFormComponent } from './components/artists-form/artists-form.component';
+import { VerifyComponent } from './components/verify/verify.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ArtistsFormComponent } from './components/artists-form/artists-form.com
     NavbarComponent,
     ArtistsListComponent,
     ArtistsFormComponent,
+    VerifyComponent,
   ],
   imports: [
     BrowserModule,
