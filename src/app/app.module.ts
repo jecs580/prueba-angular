@@ -8,6 +8,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ArtistsListComponent } from './components/artists-list/artists-list.component';
 import { ArtistsFormComponent } from './components/artists-form/artists-form.component';
 import { VerifyComponent } from './components/verify/verify.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { VerifyComponent } from './components/verify/verify.component';
     ArtistsListComponent,
     ArtistsFormComponent,
     VerifyComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
