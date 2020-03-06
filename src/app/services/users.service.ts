@@ -9,7 +9,11 @@ import { Verify } from '../interfaces/verify';
 export class UsersService {
   BASE_URL = 'http://localhost:8000';
   constructor(private http: HttpClient) { }
-  verifyUser(verify:Verify):Observable<Verify>{
-    return this.http.post<Verify>(`${this.BASE_URL}/users/verify/`,verify);
+
+  verifyUser(verify: Verify): Observable<Verify> {
+    return this.http.post<Verify>(`${this.BASE_URL}/users/verify/`, verify);
+  }
+  loginUser(login: any): Observable<any> {
+    return this.http.post<any>(`${this.BASE_URL}/users/login/`, login);
   }
 }

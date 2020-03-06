@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { UsersService } from '../../services/users.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,11 +10,18 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
 };
-  constructor() { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
   }
   Onlogin() {
-    console.log(this.login);
+    this.usersService.loginUser(this.login).subscribe(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }
